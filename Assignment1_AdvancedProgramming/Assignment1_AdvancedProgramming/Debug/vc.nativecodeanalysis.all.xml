@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\mma\documents\visual studio 2015\projects\assignment1_advancedprogramming\assignment1_advancedprogramming\</FILEPATH>
+      <FILENAME>source.cpp</FILENAME>
+      <LINE>10</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>6001</DEFECTCODE>
+    <DESCRIPTION>Using uninitialized memory 'testChar'.</DESCRIPTION>
+    <FUNCTION>bla</FUNCTION>
+    <DECORATED>?bla@@YAPADXZ</DECORATED>
+    <FUNCLINE>3</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>3</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\mma\documents\visual studio 2015\projects\assignment1_advancedprogramming\assignment1_advancedprogramming\</FILEPATH>
+        <FILENAME>source.cpp</FILENAME>
+        <LINE>5</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\mma\documents\visual studio 2015\projects\assignment1_advancedprogramming\assignment1_advancedprogramming\</FILEPATH>
+        <FILENAME>source.cpp</FILENAME>
+        <LINE>6</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\mma\documents\visual studio 2015\projects\assignment1_advancedprogramming\assignment1_advancedprogramming\</FILEPATH>
+        <FILENAME>source.cpp</FILENAME>
+        <LINE>7</LINE>
+        <COLUMN>1</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'testChar' is not initialized</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\mma\documents\visual studio 2015\projects\assignment1_advancedprogramming\assignment1_advancedprogramming\</FILEPATH>
+        <FILENAME>source.cpp</FILENAME>
+        <LINE>10</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'testChar' is used, but may not have been initialized</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT></DEFECTS>
