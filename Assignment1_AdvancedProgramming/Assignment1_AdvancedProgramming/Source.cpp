@@ -2,7 +2,7 @@
 
 class StringBuffer {
 
-//private:
+	//private:
 public:
 	char* _strbuf;                                   //buffer to store the original string
 	int _length;                                       //length of the string
@@ -10,7 +10,7 @@ public:
 public:
 	StringBuffer();  //default constructor
 	~StringBuffer();                //destructor; would delete the allocated buffer
-	//StringBuffer(const StringBuffer&);              //constructor for shallow copying
+									//StringBuffer(const StringBuffer&);              //constructor for shallow copying
 	StringBuffer(char*, int);   //constructor to convert a char* to StringBuffer
 	char charAt(int) const;   //returns the character at the passed index
 	int length() const;                            //returns the length of the buffer
@@ -30,7 +30,7 @@ public:
 
 StringBuffer::~StringBuffer() { //destructor; would delete the allocated buffer
 
-	delete [] _strbuf;
+	delete[] _strbuf;
 
 }
 
@@ -39,14 +39,21 @@ StringBuffer::StringBuffer() {
 	_length = 0;
 }
 
-StringBuffer::StringBuffer(char* newString, int length){ //constructor to convert a char* to StringBuffer
+StringBuffer::StringBuffer(char* newString, int length) { //constructor to convert a char* to StringBuffer
 	_strbuf = newString;
 	_length = length;
 }
 
 char StringBuffer::charAt(int index) const { //returns the character at the passed index
 
-	return _strbuf[index];
+
+	if (_length == 0 || index >= _length || index < 0) {
+		std::cout << "Invalid index accessed." << std::endl;
+		return ' ';
+		
+	}
+	else
+		return _strbuf[index];
 
 }
 
@@ -55,27 +62,43 @@ int StringBuffer::length() const { //returns the length of the buffer
 }
 
 void StringBuffer::reserve(int length) { //allocates memory for the string, according to the passed character length
-	
-	//if (_length >= 0) {
-	//	delete [] _strbuf; // delete previous data, if there was, to prevent mem leak.
-	//	_length = 0;
-	//}
-	
-	//delete[] _strbuf; ?? not working...
 
-	_strbuf = new char[length];
-	_length = length; // garbage value in the end. Also, mem leak is present, since prev. data not deleted
+	char* mystring = new char[_length + length];
+	for (int i = 0; i < _length; i++)
+	{
+		mystring[i] = _strbuf[i];
+	}
+	//mystring[_length] = newChar;
+	delete[] _strbuf;
+	_strbuf = new char[_length + 1];
+	_length+= length;
+	for (int i = 0; i < _length; i++)
+	{
+		_strbuf[i] = mystring[i];
+	}
+	delete[] mystring;
+
 }
 
 void StringBuffer::append(char newChar) { //appends a single character at the end
 
-	char* newString = new char[_length+1]; // make new string of length+1 (+1 for new char) 
+	//_strbuf;
+	//_length;
 
-	strcpy_s(newString, sizeof newString,_strbuf); // copy the data into _strbuf
-	newString[_length] = newChar; // append new char
-	delete [] _strbuf; // delete previous data
-	_strbuf = newString; // assign pointer to new data (newString and _strbuf pointing to same!)
-	_length++; // increment length
+	char* mystring = new char[_length + 1];
+	for (int i = 0; i < _length; i++)
+	{
+		mystring[i] = _strbuf[i];
+	}
+	mystring[_length] = newChar;
+	delete[] _strbuf;
+	_strbuf = new char[_length + 1];
+	_length++;
+	for (int i = 0; i < _length; i++)
+	{
+		_strbuf[i] = mystring[i];
+	}
+	delete[] mystring;
 
 }
 
@@ -87,10 +110,26 @@ int main(void) {
 	std::cout << "Appending 'c'..." << std::endl;
 	newString->append('c');
 	newString->print();
-
-	//newString->reserve(7);
+	newString->append('f');
 	newString->print();
+	newString->append('g');
+	newString->print();
+	newString->append('h');
+	newString->print();
+	newString->append('i');
+	newString->print();
+	std::cout << std::endl;
+	std::cout << newString->charAt(0) << std::endl;
+	std::cout << newString->charAt(1) << std::endl;
+	std::cout << newString->charAt(2) << std::endl;
+	std::cout << newString->charAt(3) << std::endl;
+	std::cout << newString->charAt(4) << std::endl;
+	std::cout << newString->charAt(5) << std::endl;
 
 	
+	std::cout << newString->_length << std::endl;
+	newString->reserve(10);
+	std::cout << newString->_length << std::endl;
+
 
 }
