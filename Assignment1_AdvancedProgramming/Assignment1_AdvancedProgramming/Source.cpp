@@ -1,50 +1,51 @@
 #include <iostream>
 
-class StringBuffer {
+namespace A {
+	class StringBuffer {
 
-	//private:
-public:
-	char* _strbuf;                                   //buffer to store the original string
-	int _length;                                       //length of the string
+		//private:
+	public:
+		char* _strbuf;                                   //buffer to store the original string
+		int _length;                                       //length of the string
 
-public:
-	StringBuffer();  //default constructor
-	~StringBuffer();                //destructor; would delete the allocated buffer
-									//StringBuffer(const StringBuffer&);              //constructor for shallow copying
-	StringBuffer(char*, int);   //constructor to convert a char* to StringBuffer
-	char charAt(int) const;   //returns the character at the passed index
-	int length() const;                            //returns the length of the buffer
-	void reserve(int);                             //allocates memory for the string, according to the passed character length
-	void append(char);                          //appends a single character at the end
+	public:
+		StringBuffer();  //default constructor
+		~StringBuffer();                //destructor; would delete the allocated buffer
+										//StringBuffer(const StringBuffer&);              //constructor for shallow copying
+		StringBuffer(char*, int);   //constructor to convert a char* to StringBuffer
+		char charAt(int) const;   //returns the character at the passed index
+		int length() const;                            //returns the length of the buffer
+		void reserve(int);                             //allocates memory for the string, according to the passed character length
+		void append(char);                          //appends a single character at the end
 
-	void print() { // only for testing purposes
+		void print() { // only for testing purposes
 
-		for (int i = 0; i < _length; i++) {
-			std::cout << _strbuf[i];
+			for (int i = 0; i < _length; i++) {
+				std::cout << _strbuf[i];
+			}
+			std::cout << std::endl;
+			std::cout << "Length: " << _length << std::endl;
 		}
-		std::cout << std::endl;
-		std::cout << "Length: " << _length << std::endl;
-	}
 
-};
-
-StringBuffer::~StringBuffer() { //destructor; would delete the allocated buffer
+	};
+}
+A::StringBuffer::~StringBuffer() { //destructor; would delete the allocated buffer
 
 	delete[] _strbuf;
 
 }
 
-StringBuffer::StringBuffer() {
+A::StringBuffer::StringBuffer() {
 	_strbuf = new char();
 	_length = 0;
 }
 
-StringBuffer::StringBuffer(char* newString, int length) { //constructor to convert a char* to StringBuffer
+A::StringBuffer::StringBuffer(char* newString, int length) { //constructor to convert a char* to StringBuffer
 	_strbuf = newString;
 	_length = length;
 }
 
-char StringBuffer::charAt(int index) const { //returns the character at the passed index
+char A::StringBuffer::charAt(int index) const { //returns the character at the passed index
 
 
 	if (_length == 0 || index >= _length || index < 0) {
@@ -57,11 +58,11 @@ char StringBuffer::charAt(int index) const { //returns the character at the pass
 
 }
 
-int StringBuffer::length() const { //returns the length of the buffer
+int A::StringBuffer::length() const { //returns the length of the buffer
 	return _length;
 }
 
-void StringBuffer::reserve(int length) { //allocates memory for the string, according to the passed character length
+void A::StringBuffer::reserve(int length) { //allocates memory for the string, according to the passed character length
 
 	char* mystring = new char[_length + length];
 	for (int i = 0; i < _length; i++)
@@ -80,7 +81,7 @@ void StringBuffer::reserve(int length) { //allocates memory for the string, acco
 
 }
 
-void StringBuffer::append(char newChar) { //appends a single character at the end
+void A::StringBuffer::append(char newChar) { //appends a single character at the end
 
 	//_strbuf;
 	//_length;
@@ -102,9 +103,15 @@ void StringBuffer::append(char newChar) { //appends a single character at the en
 
 }
 
+namespace B {
+	class StringBuffer {
+
+	};
+}
+
 int main(void) {
 
-	StringBuffer *newString = new StringBuffer();
+	A::StringBuffer *newString = new A::StringBuffer();
 	newString->print();
 
 	std::cout << "Appending 'c'..." << std::endl;
